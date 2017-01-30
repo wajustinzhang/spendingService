@@ -7,11 +7,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.1.5.RELEASE</version>
+        <version>1.4.4.RELEASE</version>
     </parent>
 
-    <groupId>com.thoersch</groupId>
-    <artifactId>spring-boot-rest-api-seed</artifactId>
+    <groupId>com.zeal</groupId>
+    <artifactId>zeal-spending</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -19,7 +19,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <targetJdk>1.8</targetJdk>
         <java.version>1.8</java.version>
-        <spring-boot-version>1.1.5.RELEASE</spring-boot-version>
+        <spring-boot-version>1.5.0.RC1</spring-boot-version>
         <postgresql-version>9.3-1100-jdbc41</postgresql-version>
         <hibernate-validator-version>5.1.0.Final</hibernate-validator-version>
         <jdbi-version>2.53</jdbi-version>
@@ -34,6 +34,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -133,12 +134,20 @@
         </dependency>
         <!-- End Jersey -->
 
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons-dbcp.version}</version>
+        </dependency>
+
         <!-- Postgres -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql-version}</version>
         </dependency>
+
+
         <!-- End Postgres -->
 
         <!-- Test Dependencies -->
@@ -162,24 +171,17 @@
             <artifactId>commons-beanutils</artifactId>
             <version>${beanutils.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
         <!-- End Utilities -->
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <url>${liquibase.url}</url>
-                    <driver>org.postgresql.Driver</driver>
-                    <username>${liquibase.username}</username>
-                    <password>${liquibase.password}</password>
-                    <changeLogFile>src/main/resources/migrations.xml</changeLogFile>
-                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -201,9 +203,9 @@
         <profile>
             <id>local</id>
             <properties>
-                <liquibase.url>jdbc:postgresql://localhost:5432/SpringBootRestApi</liquibase.url>
-                <liquibase.username>SpringBootUser</liquibase.username>
-                <liquibase.password>SpringBootPass</liquibase.password>
+                <liquibase.url>jdbc:postgresql://localhost:5432/leaz</liquibase.url>
+                <liquibase.username>dev</liquibase.username>
+                <liquibase.password>welcome</liquibase.password>
             </properties>
         </profile>
     </profiles>
